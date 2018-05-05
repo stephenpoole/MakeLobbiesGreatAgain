@@ -1,11 +1,11 @@
 package mlga.io;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.concurrent.ConcurrentHashMap;
-import java.io.FileOutputStream;
-import java.io.File;
 
 /**  The Settings class exposes access to rapidly read/save values for a key->value system.
 	All settings keys/values are stored and read as Strings (and then potentially converted, depending on the method called),

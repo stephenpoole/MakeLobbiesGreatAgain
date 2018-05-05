@@ -2,6 +2,9 @@
 *.class
 *.json
 *.log
+/.idea
+/.settings
+
 MLGA.jar
 /bin
 

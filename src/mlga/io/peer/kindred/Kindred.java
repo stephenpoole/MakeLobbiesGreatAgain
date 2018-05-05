@@ -88,7 +88,7 @@ public class Kindred {
 		} else {
 			System.out.println("KINDRED: Identified Peer: " + id);
 		}
-		iop.setUID(re.get("uid").getAsString());
+		iop.setUID(id);
 		re.getAsJsonArray("known_ips").forEach((r) ->{
 			iop.addPrehashedIP(r.getAsInt());;
 		});

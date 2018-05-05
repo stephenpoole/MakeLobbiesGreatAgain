@@ -59,6 +59,8 @@ public class Boot {
 	
 	public static void main(String[] args) throws UnsupportedLookAndFeelException, AWTException, ClassNotFoundException, InterruptedException,
 	FontFormatException, InstantiationException, IllegalAccessException, IOException, PcapNativeException, NotOpenException {
+        System.setProperty("jna.nosys","true");
+
 		if(!Sanity.check()){
 			System.exit(1);
 		}
@@ -129,6 +131,7 @@ public class Boot {
 	public static void setupTray() throws AWTException{
 		final SystemTray tray = SystemTray.getSystemTray();
 		final PopupMenu popup = new PopupMenu();
+        final MenuItem info = new MenuItem();
 		final MenuItem exit = new MenuItem();
 		final TrayIcon trayIcon = new TrayIcon(new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB), "MLGA", popup);
 		try {
@@ -138,6 +141,13 @@ public class Boot {
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		
+        info.addActionListener(e -> {
+            String message = "Double-Click to lock/unlock the overlay for dragging.\n"
+                    + "Left click on a player to set blocked/loved."
+                    + "Right click on a player to edit their note.";
+            JOptionPane.showMessageDialog(null, message, "Information", JOptionPane.INFORMATION_MESSAGE);
+        });
 		
 		exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -152,7 +162,9 @@ public class Boot {
 			}
 		});
 		exit.setLabel("Exit");
+        info.setLabel("Help");
 		popup.add(exit);
+        popup.add(info);
 		tray.add(trayIcon);
 	}
 

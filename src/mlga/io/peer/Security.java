@@ -1,8 +1,13 @@
 package mlga.io.peer;
 
+import java.io.IOException;
 import java.net.NetworkInterface;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 
 import javax.crypto.Cipher;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
@@ -13,42 +18,44 @@ import mlga.Boot;
  */
 public class Security {
 	
-	/**
-	 * Builds the Cipher Object userd for encryption/decryption.
-	 * @param readMode The Cipher will be initiated in either encrypt/decrypt mode.
-	 * @return Cipher object, ready to go.
-	 * @throws Exception Many possible issues can arise, so this is a catch-all.
-	 */
-	public static Cipher getCipher(boolean readMode) throws Exception{
-		SecretKey desKey;
-		Cipher cipher = null;
-		byte[] mac = new byte[8];
-		
-		int i = 0;
-		if(Boot.nif.getLinkLayerAddresses().get(0) != null){
-			for(byte b : Boot.nif.getLinkLayerAddresses().get(0).getAddress()){
-				mac[i] = b;
-				i++;
-			}
-		}else{
-			for(byte b : NetworkInterface.getNetworkInterfaces().nextElement().getHardwareAddress()){
-				mac[i] = b;
-				i++;
-			}
-		}
-		mac[6] = 'W';
-		mac[7] = 'C';
+    /**
+     * Builds the Cipher Object userd for encryption/decryption.
+     *
+     * @param readMode The Cipher will be initiated in either encrypt/decrypt mode.
+     * @return Cipher object, ready to go.
+     * @throws Exception Many possible issues can arise, so this is a catch-all.
+     */
+    public static Cipher getCipher(boolean readMode) throws IOException, InvalidKeyException, InvalidKeySpecException,
+            NoSuchPaddingException, NoSuchAlgorithmException {
+        SecretKey desKey;
+        byte[] mac = new byte[8];
 
-		DESKeySpec key = new DESKeySpec(mac);
-		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
-		desKey = keyFactory.generateSecret(key);
-		cipher = Cipher.getInstance("DES");
+        int i = 0;
+        if (Boot.nif.getLinkLayerAddresses().get(0) != null) {
+            for (byte b : Boot.nif.getLinkLayerAddresses().get(0).getAddress()) {
+                mac[i] = b;
+                i++;
+            }
+        } else {
+            for (byte b : NetworkInterface.getNetworkInterfaces().nextElement().getHardwareAddress()) {
+                mac[i] = b;
+                i++;
+            }
+        }
+        mac[6] = 'W';
+        mac[7] = 'C';
 
-		if(readMode){
-			cipher.init(Cipher.DECRYPT_MODE, desKey);
-		}else{
-			cipher.init(Cipher.ENCRYPT_MODE, desKey);
-		}
-		return cipher;
-	}
+        DESKeySpec key = new DESKeySpec(mac);
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
+        desKey = keyFactory.generateSecret(key);
+        Cipher cipher = Cipher.getInstance("DES");
+
+        if (readMode) {
+            cipher.init(Cipher.DECRYPT_MODE, desKey);
+        } else {
+            cipher.init(Cipher.ENCRYPT_MODE, desKey);
+        }
+        return cipher;
+    }
+
 }

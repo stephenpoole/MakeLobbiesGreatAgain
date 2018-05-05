@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/PsiLupan/MakeLobbiesGreatAgain.svg)](https://travis-ci.org/PsiLupan/MakeLobbiesGreatAgain/)
+[![Build Status](https://travis-ci.org/stephenpoole/MakeLobbiesGreatAgain.svg)](https://travis-ci.org/stephenpoole/MakeLobbiesGreatAgain/)
 
 ## HOW DOES IT WORK?
 MakeLobbiesGreatAgain uses a packet capture library to detect STUN packets from the client and server of Dead By Daylight, in order to determine who you're connected to and get ping from.
@@ -9,15 +9,17 @@ Source: http://steamcommunity.com/app/381210/discussions/0/1319962683448307108/
 
 ## APPLICATION SUPPORTS BOTH KILLER AND SURVIVOR
 
-**NOTE**: If you were linked here from another source, such as Reddit, be sure to check for the latest versions for the best quality. You can find all versions here: [MLGA Releases](https://github.com/PsiLupan/MakeLobbiesGreatAgain/releases)
+**NOTE**: If you were linked here from another source, such as Reddit, be sure to check for the latest versions for the best quality. You can find all versions here: [MLGA Releases](https://github.com/PsiLupan/stephenpoole/releases)
 
 Primary Features:
 * Determining Ping
 * Block/Love
+* Add a short note to a player
 
 Optional Features: 
 * Double-Click to lock/unlock the overlay for dragging.
 * Left Click on a player to toggle BLOCKED, LOVED, or back to the normal display.
+* Right Click on a player to edit that player's note.
 * To exit, simply look for Jake's face in your system tray near the clock, right-click, and select Exit.
 
 ## HOW TO INSTALL AND USE:

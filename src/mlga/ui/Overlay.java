@@ -23,7 +23,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
-import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -186,20 +185,6 @@ public class Overlay extends JPanel {
 		}else{
 			this.addPeer(id, ping);
 		}
-	}
-
-	public int numPeers(){
-		return peers.size();
-	}
-
-	public void clearPeers(){
-		peers.clear();
-	}
-
-	public void removePeer(Inet4Address i){
-		Peer p = this.getPeer(i);
-		if(p != null)
-			peers.remove(p);
 	}
 
 	/** Finds a Peer connection by its ID. */

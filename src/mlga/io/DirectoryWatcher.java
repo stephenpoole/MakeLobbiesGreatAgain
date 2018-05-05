@@ -2,9 +2,9 @@ package mlga.io;
 
 import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_CREATE;
+import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
 import static java.nio.file.StandardWatchEventKinds.OVERFLOW;
-import static java.nio.file.StandardWatchEventKinds.ENTRY_DELETE;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,9 +15,9 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.WatchEvent;
 import java.nio.file.WatchEvent.Kind;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * Generic class for registering with the OS to watch directories for file
@@ -32,7 +32,7 @@ public class DirectoryWatcher implements Runnable{
 	/**
 	 * All possible filesystem changes that are listened for.
 	 */
-	public static enum Event {
+	public enum Event {
 		/** A new File has been created. */
 		CREATE,
 		/** A File has been deleted. */
