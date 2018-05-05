@@ -11,12 +11,13 @@ Source: http://steamcommunity.com/app/381210/discussions/0/1319962683448307108/
 
 **NOTE**: If you were linked here from another source, such as Reddit, be sure to check for the latest versions for the best quality. You can find all versions here: [MLGA Releases](https://github.com/PsiLupan/MakeLobbiesGreatAgain/releases)
 
-Primary Feature:
+Primary Features:
 * Determining Ping
+* Block/Love
 
 Optional Features: 
-* Double-Click to lock/unlock the overlay for dragging
-* Shift + Left Click on a player, highlighted in a darker color for current selection, to toggle to BLOCKED, LOVED, or back to the normal display
+* Double-Click to lock/unlock the overlay for dragging.
+* Left Click on a player to toggle BLOCKED, LOVED, or back to the normal display.
 * To exit, simply look for Jake's face in your system tray near the clock, right-click, and select Exit.
 
 ## HOW TO INSTALL AND USE:
@@ -43,8 +44,3 @@ You may need to run the application via Command Prompt (this is due to the PCap4
 * Choose Save As and name it MLGADebug.bat with the option All Files selected
 * Right-click the new batch file and Run as Administrator
 * Submit a picture or copy of the text to an Issue
-
-## ALTERNATIVE WAYS TO CONTACT ME
-* My GMail is wcarter312@gmail.com
-* My Discord is psiLupan#0316
-* My Steam account is http://steamcommunity.com/profiles/76561197995173996

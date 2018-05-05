@@ -66,4 +66,26 @@ public class Peer {
 	public long age(){
 		return System.currentTimeMillis() - this.last_seen;
 	}
+	
+	public void appendToNote(char c) {
+		this.io.setNote(this.io.getNote() + c);
+	}
+	
+	public void deleteFromNote(int charcount) {
+		String note = this.io.getNote();
+		if (charcount > note.length()) {
+			charcount = note.length();
+		} else if (charcount < 0) {
+			charcount = 0;
+		}
+		this.io.setNote(note.substring(0, note.length() - charcount));
+	}
+	
+	public String getNote() {
+		return this.io.getNote();
+	}
+	
+	public boolean hasNote() {
+		return this.io.getNote().length() > 0;
+	}
 }

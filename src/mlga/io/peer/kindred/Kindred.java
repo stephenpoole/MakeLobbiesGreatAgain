@@ -78,12 +78,15 @@ public class Kindred {
 		}
 		JsonObject re = this.postToUrl(lookup_peer_url, ar, "peer_ips");
 		if(re == null){
-			//System.err.println("KINDRED: Invalid server response!");
+			System.err.println("KINDRED: Response was null.");
 			return;
 		}
+		String id = re.get("uid").getAsString();
 		if(re.get("success") == null){
 			System.err.println("KINDRED: Could not identify Peer.");
 			return;
+		} else {
+			System.out.println("KINDRED: Identified Peer: " + id);
 		}
 		iop.setUID(re.get("uid").getAsString());
 		re.getAsJsonArray("known_ips").forEach((r) ->{

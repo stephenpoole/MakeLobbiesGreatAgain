@@ -19,6 +19,7 @@ import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Timer;
 
 import javax.imageio.ImageIO;
 import javax.swing.JButton;
@@ -62,7 +63,6 @@ public class Boot {
 			System.exit(1);
 		}
 		Settings.init();
-		Settings.set("autoload", Settings.get("autoload", "0")); //"autoload" is an ini-only toggle for advanced users.
 		setupTray();
 		
 		getLocalAddr();
@@ -84,6 +84,16 @@ public class Boot {
 		}
 		
 		ui = new Overlay();
+		Timer timer = new Timer();
+		timer.schedule(new ScreenWatcherTask(new Consumer<ScreenState>() {
+			@Override
+			public void call(ScreenState screenState) {
+				if (ui.gameState != screenState) {
+					System.out.println("Game state changed to " + screenState.name());
+					ui.gameState = screenState;
+				}
+			}
+		}), 2000, 1000);
 		
 		while(running){
 			final Packet packet = handle.getNextPacket();
@@ -148,8 +158,9 @@ public class Boot {
 
 	public static void getLocalAddr() throws InterruptedException, PcapNativeException, UnknownHostException, SocketException, 
 	ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
-		if(Settings.getDouble("autoload", 0) == 1){
-			addr = InetAddress.getByName(Settings.get("addr", ""));
+		InetAddress _addr = InetAddress.getByName(Settings.get("addr", ""));
+		if(_addr != null && _addr.toString().length() > 0){
+			addr = _addr;
 			return;
 		}
 		
